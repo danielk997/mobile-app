@@ -1,0 +1,24 @@
+<ion-app>
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Header</ion-title>
+      <ion-button [routerLink]="['/detail']">Go to detail</ion-button>
+
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content class="ion-padding">
+    <google-map #map [height]="'100%'" [width]="'100%'">
+      <ng-container *ngFor="let marker of markers">
+        <map-marker [options]="marker"></map-marker>
+      </ng-container>
+    </google-map>
+  </ion-content>
+
+
+  <ion-footer>
+    <ion-toolbar>
+      <ion-title>Footer</ion-title>
+    </ion-toolbar>
+  </ion-footer>
+</ion-app>
