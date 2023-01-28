@@ -1,18 +1,40 @@
 <ion-app>
   <ion-header>
     <ion-toolbar>
-      <ion-title>Header</ion-title>
-      <ion-button [routerLink]="['/detail']">Go to detail</ion-button>
-
+      Score: {{getCorrectAnswers().length}} / {{getCurrentAnswers().length}}
     </ion-toolbar>
   </ion-header>
 
   <ion-content class="ion-padding">
     <google-map #map [height]="'100%'" [width]="'100%'">
       <ng-container *ngFor="let marker of markers">
-        <map-marker [options]="marker"></map-marker>
+        <map-marker
+          [options]="marker"
+          (mapClick)="onMarkerClick(marker.title)"></map-marker>
       </ng-container>
     </google-map>
+    <p>Message</p>
+    <ion-modal #modal trigger="open-modal">
+      <ng-template>
+        <ion-header>
+          <ion-toolbar>
+            <ion-buttons slot="start">
+            </ion-buttons>
+            <ion-title>{{question?.content}}</ion-title>
+            <div class="answers">
+              <ng-container *ngFor="let answer of question?.answers ?? []">
+                <div (click)="onAnswer(answer.id)">{{answer?.content ?? ''}}</div>
+              </ng-container>
+            </div>
+            <ion-buttons slot="end">
+            </ion-buttons>
+          </ion-toolbar>
+        </ion-header>
+        <ion-content class="ion-padding">
+
+        </ion-content>
+      </ng-template>
+    </ion-modal>
   </ion-content>
 
 
